@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import carlosLogin from "../views/login/carlosLogin.vue";
+import CarlosLogin from "../views/login/CarlosLogin.vue";
 import { message } from "tdesign-vue";
 Vue.use(VueRouter);
 
@@ -8,7 +8,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: carlosLogin,
+    component: CarlosLogin,
   },
   {
     path: "/about",
@@ -19,6 +19,11 @@ const routes = [
     path: "/firstpage",
     name: "firstpage",
     component: () => import("../views/firstPage/FirstPage.vue"),
+  },
+  {
+    path: "/express",
+    name: "express",
+    component: () => import("../views/express/ExpressCarlos.vue"),
   },
 ];
 
