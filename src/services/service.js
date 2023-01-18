@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const serve = axios.create({
-  baseURL: "https://api.github.com/search",
+  baseURL: "https://",
   timeout: 10000,
 });

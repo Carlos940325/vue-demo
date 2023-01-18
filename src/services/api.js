@@ -2,7 +2,7 @@ import { serve } from "./service";
 
 // 头像模块 查
 export async function getHeadImg(props) {
-  return serve.get("/users", {
+  return serve.get("api.github.com/search/users", {
     params: {
       ...props,
     },
@@ -14,3 +14,5 @@ export async function getHeadImg(props) {
 // 头像模块 删
 
 // 头像模块 改
+
+

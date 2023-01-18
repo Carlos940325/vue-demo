@@ -9,13 +9,13 @@
         <div>爱车：{{ item.car }}</div>
       </li>
     </ul>
-    <detailContent :name="name" style="margin: 20px 0px" />
+    <DetailContent :name="name" style="margin: 20px 0px" />
     <t-loading text="加载中..." size="26px" :loading="pageLoading">
       <ul class="githubArea">
         <li
-          v-for="val in headData"
+          v-for="(val, index) in headData"
           :key="val.id"
-          @click="detailPerson(val.id, val.type)"
+          @click="detailPerson(index, val.type)"
         >
           <div>id：{{ val.id }}</div>
           <img :src="val.avatar_url" alt="" />
@@ -28,14 +28,14 @@
 
 <script>
 import firstpageData from "@/mock/firstpageData";
-import detailContent from "../../components/firstpageCPT/detailContent.vue";
+import DetailContent from "../../components/firstpageCPT/DetailContent.vue";
 import { getHeadImg } from "../../services/api";
 export default {
   created() {
     this.getHeadImgData();
   },
   components: {
-    detailContent,
+    DetailContent,
   },
   data() {
     return {
@@ -53,7 +53,7 @@ export default {
       this.name = props;
     },
     handlLogout() {
-      sessionStorage.clear("token");
+      sessionStorage.removeItem("token");
       this.$router.push("/");
     },
     getHeadImgData() {

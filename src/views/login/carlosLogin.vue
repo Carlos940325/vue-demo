@@ -7,13 +7,13 @@
       @submit="onSubmit"
       :colon="true"
       :labelWidth="0"
-      style="width: 20%"
+      class="loginArea"
     >
       <t-form-item name="account">
         <t-input
           clearable
           v-model="formData.account"
-          placeholder="请输入账户名"
+          :placeholder="lastLoginName ? `上次登录人：${lastLoginName}` : '请输入用户名' "
         >
           <desktop-icon slot="prefix-icon"></desktop-icon>
         </t-input>
@@ -59,9 +59,10 @@ export default {
   },
   data() {
     return {
+      lastLoginName: sessionStorage.getItem('userName'),
       loginLoading: false,
       formData: {
-        account: "",
+        account: '',
         password: "",
       },
       reqKeyWord: {
@@ -84,15 +85,13 @@ export default {
       // loading 和 disable 开启
       this.loginLoading = true;
       if (validateResult === true) {
-        if (account === "carlos" && password === "123456") {
-            sessionStorage.setItem("token", password);
-            this.$router
-              .push({
-                path: "/firstpage",
-                query: {
-                
-                },
-              })
+        if (typeof account == "string" && password === "123456") {
+          sessionStorage.setItem("token", password);
+          sessionStorage.setItem('userName',account)
+          this.$router.push({
+            path: "/firstpage",
+            query: {},
+          });
           this.loginLoading = false;
         } else {
           this.$message.error("请检查您输入的信息");
@@ -118,5 +117,24 @@ export default {
   background: url("../../assets/login_bgi.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+
+  .loginArea {
+    transform: translateY(30px);
+    width: 20%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    animation: loginMove ease-out 1s forwards;
+  }
+
+  @keyframes loginMove {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
 }
 </style>
