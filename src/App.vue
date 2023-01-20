@@ -1,9 +1,14 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  created(){
+  }
+}
+</script>
 <style lang="less">
 * {
   padding: 0;
@@ -15,5 +20,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+  width: 100%;
 }
 </style>

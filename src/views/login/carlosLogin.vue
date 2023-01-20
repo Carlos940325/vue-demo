@@ -13,7 +13,9 @@
         <t-input
           clearable
           v-model="formData.account"
-          :placeholder="lastLoginName ? `上次登录人：${lastLoginName}` : '请输入用户名' "
+          :placeholder="
+            lastLoginName ? `上次登录人：${lastLoginName}` : '请输入用户名'
+          "
         >
           <desktop-icon slot="prefix-icon"></desktop-icon>
         </t-input>
@@ -59,10 +61,10 @@ export default {
   },
   data() {
     return {
-      lastLoginName: sessionStorage.getItem('userName'),
+      lastLoginName: sessionStorage.getItem("userName"),
       loginLoading: false,
       formData: {
-        account: '',
+        account: "",
         password: "",
       },
       reqKeyWord: {
@@ -87,7 +89,7 @@ export default {
       if (validateResult === true) {
         if (typeof account == "string" && password === "123456") {
           sessionStorage.setItem("token", password);
-          sessionStorage.setItem('userName',account)
+          sessionStorage.setItem("userName", account);
           this.$router.push({
             path: "/firstpage",
             query: {},

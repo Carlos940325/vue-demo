@@ -16,7 +16,6 @@ export default {
   },
   methods: {
     articalProps(){
-      console.log(this.$route)
       const {query: {id}} = this.$route
       return {
         id,

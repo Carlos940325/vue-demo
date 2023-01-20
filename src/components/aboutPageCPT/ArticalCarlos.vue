@@ -1,11 +1,14 @@
 <template>
   <div class="articlePage">
-    <div class="express" @click="$router.push('/express')"></div>
+    <t-card style="height: 100%;">
+      <div class="express"></div>
     <t-divider></t-divider>
     <t-loading :loading="articleData ? false : true">
       <div style="font: 50px bolder;margin-bottom: 30px;">{{ articleData.title }}</div>
       <h3>{{ articleData.body }}</h3>
     </t-loading>
+    </t-card>
+ 
   </div>
 </template>
 
@@ -13,7 +16,7 @@
 import { getArticleById } from "../../services/culture";
 
 export default {
-  mounted() {
+  created() {
     this.getArticle();
   },
   props: {
@@ -32,7 +35,6 @@ export default {
       const { id } = this.prop;
       getArticleById(id).then((res) => {
         this.articleData = res.data;
-        console.log(this.articleData);
       });
     },
   },
@@ -41,8 +43,8 @@ export default {
 
 <style lang="less" scoped>
 .articlePage {
-  height: 100vh;
   width: 100%;
+  height: 100%;
 }
 .express {
   background: url("../../assets/express.jpeg");
