@@ -29,5 +29,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.aboutPage {
+  width: 100%;
+}
 </style>

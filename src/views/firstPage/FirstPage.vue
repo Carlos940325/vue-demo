@@ -5,9 +5,10 @@
         <t-head-menu value="item1" height="120px">
           <img
             slot="logo"
-            width="136"
+            width="180"
+            height="100%"
             class="logo"
-            src="https://www.tencent.com/img/index/menu_logo_hover.png"
+            :src="topLogoImg"
             alt="logo"
           />
           <t-menu-item value="item1">已选内容</t-menu-item>
@@ -22,6 +23,12 @@
               <a href="javascript:;"
                 ><icon class="t-menu__operations-icon" name="search"
               /></a>
+              <t-input
+                class="listSearch"
+                @change="onSearch"
+                placeholder="🔍"
+                clearable
+              />
             </div>
 
             <a href="javascript:;"
@@ -52,10 +59,7 @@
               />
             </template>
             <t-menu-group title="Main Nav">
-              <t-menu-item
-                value="dashboard"
-                to="/firstpage/dashboard"
-              >
+              <t-menu-item value="dashboard" to="/firstpage/dashboard">
                 <template #icon>
                   <icon name="app" />
                 </template>
@@ -70,17 +74,21 @@
                 <t-menu-item value="default" to="/firstpage/default"
                   >获取接口数据</t-menu-item
                 >
-                <t-menu-item value="about" to="/firstpage/about?id=1"
+                <t-menu-item
+                  value="about"
+                  :to="`/firstpage/about?id=${(Math.random() * 10).toFixed()}`"
                   >文章页</t-menu-item
                 >
-                <t-menu-item value="expressWeather" to="/firstpage/express">工具查询</t-menu-item>
+                <t-menu-item value="expressWeather" to="/firstpage/express"
+                  >工具查询</t-menu-item
+                >
                 <!-- <t-menu-item value="2-1-4">树状筛选列表项</t-menu-item> -->
               </t-submenu>
-              <t-menu-item value="2-2">
+              <t-menu-item value="tableList" to="/firstpage/tableList">
                 <template #icon>
                   <icon name="edit-1" />
                 </template>
-                表单项
+                表格数据
               </t-menu-item>
               <t-menu-item value="2-3">
                 <template #icon>
@@ -129,12 +137,12 @@
             </keep-alive>
           </t-content>
           <t-footer
-            >Copyright @ 2019-{{ new Date().getFullYear() }} Tencent. All Rights
-            Reserved</t-footer
+            >Copyright @ 2019-{{ new Date().getFullYear() }} Carlos System</t-footer
           >
         </t-layout>
       </t-layout>
     </t-layout>
+    <audio :src="bgm" loop autoplay ></audio>
   </div>
 </template>
 
@@ -143,9 +151,9 @@
 import { Icon } from "tdesign-icons-vue";
 export default {
   created() {
-    if (this.$router.currentRoute.fullPath !== "/firstpage/dashboard") {
-      this.$router.push("/firstpage/dashboard");
-    }
+    // if (this.$router.currentRoute.fullPath !== "/firstpage/dashboard") {
+    //   this.$router.push("/firstpage/dashboard");
+    // }
   },
   mounted() {},
   components: {
@@ -153,6 +161,8 @@ export default {
   },
   data() {
     return {
+      topLogoImg: require('../../assets/topLogo.jpg'),
+      bgm: require('../../assets/heyBrother.mp3'),
       menuActiveName: "/firstpage/dashboard",
       headData: false,
       collapsed: false,
@@ -162,8 +172,9 @@ export default {
     };
   },
   methods: {
-    isData(data) {
-      this.headData = data;
+    onSearch(value) {
+      // const {value} = e.target
+      console.log(this, value);
     },
     handlLogout() {
       sessionStorage.removeItem("token");
@@ -182,6 +193,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .t-layout__sider {
   width: unset;
 }
@@ -199,6 +211,7 @@ export default {
   font-size: large;
   font-weight: bold;
   animation: tipMove 4s ease forwards;
+  position: relative;
 }
 @keyframes tipMove {
   0% {
@@ -224,6 +237,27 @@ export default {
   }
   100% {
     opacity: 0;
+  }
+}
+
+.listSearch:hover {
+  position: absolute;
+  bottom: 10px;
+  right: 109px;
+  z-index: auto;
+  width: 60%;
+  transition: all 1s;
+}
+.listSearch {
+  position: absolute;
+  bottom: 10px;
+  right: 109px;
+  z-index: auto;
+  width: 12%;
+
+  transition: all 1s;
+  :global(.t-input) {
+    border: none !important;
   }
 }
 </style>

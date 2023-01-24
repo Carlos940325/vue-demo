@@ -25,6 +25,7 @@ const routes = [
       {
         path: "/firstpage/default",
         name: "firstpageDefaultPage",
+        meta: {},
         component: () => import("../components/firstpageCPT/DetailContent.vue"),
       },
       {
@@ -36,6 +37,11 @@ const routes = [
         path: "/firstpage/express",
         name: "express",
         component: () => import("../views/express/ExpressCarlos.vue"),
+      },
+      {
+        path: "/firstpage/tableList",
+        name: "tableList",
+        component: () => import("../views/tableList/TableCarlos.vue"),
       },
     ],
   },

@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      lastLoginName: sessionStorage.getItem("userName"),
+      lastLoginName: localStorage.getItem("userName"),
       loginLoading: false,
       formData: {
         account: "",
@@ -89,7 +89,7 @@ export default {
       if (validateResult === true) {
         if (typeof account == "string" && password === "123456") {
           sessionStorage.setItem("token", password);
-          sessionStorage.setItem("userName", account);
+          localStorage.setItem("userName", account);
           this.$router.push({
             path: "/firstpage",
             query: {},
